@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/passengers";
+const API_URL = "https://holiday-hub-assignment1.vercel.app" + "/passengers";
 
 const getAll = async () => {
   const response = await axios.get(API_URL);
