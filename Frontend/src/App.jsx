@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import PassengerForm from "./components/PassengerForm";
 import PassengerTable from "./components/PassengerTable";
 import { fetchPassengers } from "./features/passengers/passengersSlice";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -12,8 +13,8 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Passenger Management</h1>
+    <div className="container">
+      <h1 className="text-3xl font-bold mb-8">Passenger Management</h1>
       <PassengerForm />
       <PassengerTable />
     </div>

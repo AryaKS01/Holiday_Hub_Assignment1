@@ -14,7 +14,10 @@ export const fetchPassengers = createAsyncThunk(
 
 export const createPassengers = createAsyncThunk(
   "passengers/create",
-  async (passengers) => await passengersService.create(passengers)
+  async (formData) => {
+    const response = await passengersService.create(formData);
+    return response; // Ensure backend returns created passenger data
+  }
 );
 
 export const updatePassenger = createAsyncThunk(
@@ -40,7 +43,7 @@ const passengersSlice = createSlice({
         state.passengers = action.payload;
       })
       .addCase(createPassengers.fulfilled, (state, action) => {
-        state.passengers.push(...action.payload);
+        state.passengers.push(action.payload); // Add single passenger object
       })
       .addCase(updatePassenger.fulfilled, (state, action) => {
         const index = state.passengers.findIndex(

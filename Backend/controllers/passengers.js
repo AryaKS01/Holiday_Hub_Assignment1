@@ -3,11 +3,8 @@ const fs = require("fs");
 
 const createPassenger = async (req, res) => {
   try {
-    if (!req.files.photo || !req.files.idCard) {
-      return res
-        .status(400)
-        .json({ error: "Both photo and ID card are required" });
-    }
+    // Ensure files are properly received
+    console.log("Received files:", req.files);
 
     const passenger = new Passenger({
       ...req.body,
@@ -15,8 +12,8 @@ const createPassenger = async (req, res) => {
       idCard: req.files.idCard[0].path,
     });
 
-    await passenger.save();
-    res.status(201).json(passenger);
+    const savedPassenger = await passenger.save();
+    res.status(201).json(savedPassenger); // Must return the full object
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

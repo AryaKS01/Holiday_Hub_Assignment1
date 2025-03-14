@@ -42,135 +42,146 @@ const PassengerTable = () => {
       <input
         type="text"
         placeholder="Search by name or email"
-        className="border p-2 w-full"
+        className="form-input"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border p-2">Name</th>
-            <th className="border p-2">Age</th>
-            <th className="border p-2">Gender</th>
-            <th className="border p-2">Contact</th>
-            <th className="border p-2">Email</th>
-            <th className="border p-2">Photo</th>
-            <th className="border p-2">ID Card</th>
-            <th className="border p-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredPassengers.map((passenger) => (
-            <tr key={passenger._id}>
-              <td className="border p-2">
-                {editingId === passenger._id ? (
-                  <input
-                    value={editData.name}
-                    onChange={(e) =>
-                      setEditData({ ...editData, name: e.target.value })
-                    }
-                  />
-                ) : (
-                  passenger.name
-                )}
-              </td>
-              <td className="border p-2">
-                {editingId === passenger._id ? (
-                  <input
-                    type="number"
-                    value={editData.age}
-                    onChange={(e) =>
-                      setEditData({ ...editData, age: e.target.value })
-                    }
-                  />
-                ) : (
-                  passenger.age
-                )}
-              </td>
-              <td className="border p-2">
-                {editingId === passenger._id ? (
-                  <select
-                    value={editData.gender}
-                    onChange={(e) =>
-                      setEditData({ ...editData, gender: e.target.value })
-                    }
-                  >
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                  </select>
-                ) : (
-                  passenger.gender
-                )}
-              </td>
-              <td className="border p-2">
-                {editingId === passenger._id ? (
-                  <input
-                    value={editData.contact}
-                    onChange={(e) =>
-                      setEditData({ ...editData, contact: e.target.value })
-                    }
-                  />
-                ) : (
-                  passenger.contact
-                )}
-              </td>
-              <td className="border p-2">
-                {editingId === passenger._id ? (
-                  <input
-                    type="email"
-                    value={editData.email}
-                    onChange={(e) =>
-                      setEditData({ ...editData, email: e.target.value })
-                    }
-                  />
-                ) : (
-                  passenger.email
-                )}
-              </td>
-              <td className="border p-2">
-                <img
-                  src={`http://localhost:5000/${passenger.photo}`}
-                  alt="Passenger"
-                  className="w-16 h-16 object-cover"
-                />
-              </td>
-              <td className="border p-2">
-                <a
-                  href={`http://localhost:5000/${passenger.idCard}`}
-                  download
-                  className="text-blue-500 hover:underline"
-                >
-                  Download PDF
-                </a>
-              </td>
-              <td className="border p-2">
-                {editingId === passenger._id ? (
-                  <button onClick={handleSave} className="text-green-500">
-                    Save
-                  </button>
-                ) : (
-                  <>
-                    <button
-                      onClick={() => handleEdit(passenger)}
-                      className="text-blue-500 mr-2"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => dispatch(deletePassenger(passenger._id))}
-                      className="text-red-500"
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
-              </td>
+      <div className="passenger-table-wrapper">
+        <table className="passenger-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Contact</th>
+              <th>Email</th>
+              <th>Photo</th>
+              <th>ID Card</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredPassengers.map((passenger) => (
+              <tr key={passenger._id}>
+                <td>
+                  {editingId === passenger._id ? (
+                    <input
+                      className="form-input"
+                      value={editData.name}
+                      onChange={(e) =>
+                        setEditData({ ...editData, name: e.target.value })
+                      }
+                    />
+                  ) : (
+                    passenger.name
+                  )}
+                </td>
+                <td>
+                  {editingId === passenger._id ? (
+                    <input
+                      className="form-input"
+                      type="number"
+                      value={editData.age}
+                      onChange={(e) =>
+                        setEditData({ ...editData, age: e.target.value })
+                      }
+                    />
+                  ) : (
+                    passenger.age
+                  )}
+                </td>
+                <td>
+                  {editingId === passenger._id ? (
+                    <select
+                      className="form-input form-select"
+                      value={editData.gender}
+                      onChange={(e) =>
+                        setEditData({ ...editData, gender: e.target.value })
+                      }
+                    >
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Other</option>
+                    </select>
+                  ) : (
+                    passenger.gender
+                  )}
+                </td>
+                <td>
+                  {editingId === passenger._id ? (
+                    <input
+                      className="form-input"
+                      value={editData.contact}
+                      onChange={(e) =>
+                        setEditData({ ...editData, contact: e.target.value })
+                      }
+                    />
+                  ) : (
+                    passenger.contact
+                  )}
+                </td>
+                <td>
+                  {editingId === passenger._id ? (
+                    <input
+                      className="form-input"
+                      type="email"
+                      value={editData.email}
+                      onChange={(e) =>
+                        setEditData({ ...editData, email: e.target.value })
+                      }
+                    />
+                  ) : (
+                    passenger.email
+                  )}
+                </td>
+                <td>
+                  <img
+                    src={`http://localhost:5000/${passenger.photo}`}
+                    alt="Passenger"
+                    className="avatar-img"
+                  />
+                </td>
+                <td>
+                  <a
+                    href={`http://localhost:5000/${passenger.idCard}`}
+                    download
+                    className="btn btn-primary"
+                  >
+                    Download
+                  </a>
+                </td>
+                <td>
+                  <div className="flex gap-2">
+                    {editingId === passenger._id ? (
+                      <button onClick={handleSave} className="btn btn-success">
+                        Save
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => handleEdit(passenger)}
+                          className="btn btn-primary"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() =>
+                            dispatch(deletePassenger(passenger._id))
+                          }
+                          className="btn btn-danger"
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
